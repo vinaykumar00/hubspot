@@ -1,0 +1,1 @@
+package com.blacaz.hubspot.models.contact;

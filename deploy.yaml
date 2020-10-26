@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hubspot-integrataion
+spec:
+  type: LoadBalancer
+  selector:
+    app: hubspot-integrataion
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: hubspot-integrataion
+  name: hubspot-integrataion
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: hubspot-integrataion
+  template: 
+    metadata: 
+      labels: 
+        app: hubspot-integrataion
+    spec: 
+      containers: 
+        - 
+          image: "523681885266.dkr.ecr.ap-southeast-1.amazonaws.com/blacaz:hubspot-integration-v10"
+          name: hubspot-integrataion
+          ports: 
+            - 
+              containerPort: 8080
